@@ -1,31 +1,31 @@
 {
-  "name": "covid-19-info-bot",
-  "version": "1.0.0",
-  "description": "\"covid info 2021 \"",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Shuhratbek2/covid-19-info.git"
-  },
-  "keywords": [
-    "\"covid",
-    "19",
-    "coronavirus",
-    "info\""
-  ],
-  "author": "Shuhrat",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Shuhratbek2/covid-19-info/issues"
-  },
-  "homepage": "https://github.com/Shuhratbek2/covid-19-info#readme",
-  "dependencies": {
-    "dotenv": "^10.0.0",
-    "node-fetch": "^2.6.1",
-    "nodemon": "^2.0.12",
-    "telegraf": "^4.4.0"
-  }
+    "name": "covid-19-info-bot",
+    "version": "1.0.0",
+    "description": "\"covid info 2021 \"",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Shuhratbek2/covid-19-info.git"
+    },
+    "keywords": [
+        "\"covid",
+        "19",
+        "coronavirus",
+        "info\""
+    ],
+    "author": "Shuhrat",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Shuhratbek2/covid-19-info/issues"
+    },
+    "homepage": "https://github.com/Shuhratbek2/covid-19-info#readme",
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "node-fetch": "^2.6.1",
+        "nodemon": "^2.0.12",
+        "telegraf": "^4.4.0"
+    }
 }
