@@ -52,7 +52,7 @@ bot.command("/statika", cxt => {
                             userName.map(val =>{
                                 return `\n <b> @`+ val +`</b>`;
                             }).join()
-                        }`)
+                        }`).then()
                 }
 })
 
@@ -128,21 +128,21 @@ bot.hears('Davlatlar 1-50', (ctx) => {
         caption: 'Caption',
         parse_mode: 'Markdown',
         ...Markup.inlineKeyboard(btnArr1)
-    })
+    }).then()
 })
 bot.hears('Davlatlar 50-100', (ctx) => {
     ctx.replyWithPhoto({ url: rasm }, {
         caption: 'Caption',
         parse_mode: 'Markdown',
         ...Markup.inlineKeyboard(btnArr2)
-    })
+    }).then()
 })
 bot.hears('Davlatlar 100-160', (ctx) => {
      ctx.replyWithPhoto({ url: rasm }, {
         caption: 'Caption',
         parse_mode: 'Markdown',
         ...Markup.inlineKeyboard(btnArr3)
-    })
+    }).then()
 
 })
 bot.hears('Davlatlar 160-222', (ctx) => {
@@ -151,7 +151,7 @@ bot.hears('Davlatlar 160-222', (ctx) => {
         caption: 'Caption',
         parse_mode: 'Markdown',
         ...Markup.inlineKeyboard(btnArr4)
-    })
+    }).then()
 
 })
 
@@ -187,6 +187,6 @@ bot.hears("Uzbekiston", cxt=>{
     "\nVafot etganlar: " + uz[0].deaths + "\nSog'ayganlar: " + uz[0].recovered+
     `\nOldingi statistikalar bilan solishtirish uchun  \n#${uz[0].country} hesh-tegidan foydalaning`
 }
-)
+).then()
 })
 bot.launch();
