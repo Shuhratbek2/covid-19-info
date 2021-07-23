@@ -15,6 +15,14 @@ if (token === undefined) {
 let userName = [];
 let obunachilar = [];
 const bot = new Telegraf(token);
+
+let keyArray = [
+    ["Davlatlar 1-50", ' Davlatlar 50-100'], // Row1 with 2 buttons
+    ['Davlatlar 100-160', 'Davlatlar 160-222'], // Row2 with 2 buttons
+    ["Uzbekiston"]
+    // ['📢 Ads', '⭐️ Rate us', '👥 Share'] // Row3 with 3 buttons
+]
+
 bot.start(cxt => {
     let chat_id = cxt.chat.id;
     if (!obunachilar.includes(chat_id)) {
@@ -22,10 +30,14 @@ bot.start(cxt => {
         if (cxt.chat.username) userName.push(cxt.chat.username);
         else userName.length(cxt.chat.last_name)
     }
-    cxt.replyWithHTML(`Assalomu aleykum men info botman \n Men sizga covid-19 bo'yicha statistik ma'lumot beraman \n` +
-        `Mendan foydalanishni boshlash uchun \n/info buyrug'ini bering!\n\n` +
-        `Taklif va kamchiliklar haqida  @Sh_admin_bot ga xabar bering`
+    cxt.reply(`Assalomu aleykum men info botman \n Men sizga covid-19 bo'yicha statistik ma'lumot beraman \n` +
+        `Men 222 davlat haqida ma'lumot berishim mumkin.\n\n Sizga yana qanday malumotlar qiziq bu haqida menga xabar bering! \n` +
+        `Taklif va kamchiliklar haqida  @Sh_admin_bot ga xabar bering`, Markup
+        .keyboard(keyArray)
+        .oneTime()
+        .resize()
     )
+
 })
 
 
@@ -108,19 +120,7 @@ function dom() {
     })
 
 }
-let keyArray =[
-    ["Davlatlar 1-50", ' Davlatlar 50-100'], // Row1 with 2 buttons
-    ['Davlatlar 100-160', 'Davlatlar 160-222'], // Row2 with 2 buttons
-    ["Uzbekiston"]
-    // ['📢 Ads', '⭐️ Rate us', '👥 Share'] // Row3 with 3 buttons
-]
-bot.command('info', async(ctx) => {
-    return await ctx.reply("Mavjud tugmalardan birini bosib to'liq ro'yxatni oling ", Markup
-        .keyboard(keyArray)
-        .oneTime()
-        .resize()
-    )
-})
+
 const rasm = 'https://i2.wp.com/healthtechinsider.com/wp-content/uploads/CDC-COVID-bot.jpg?resize=600%2C275&ssl=1';
 bot.hears('Davlatlar 1-50', (ctx) => {
     
