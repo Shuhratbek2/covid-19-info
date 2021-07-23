@@ -168,7 +168,7 @@ for (let i = 0; i <= 222; i++) {
                     caption: `Davlat: ${data[i].country},\nAholisi: ${data[i].population} ` +
                         "\nJami kasallanganlar: " + data[i].cases + "\nBugun qayt etilganlar: " + data[i].todayCases +
                         "\nVafot etganlar: " + data[i].deaths + "\nSog'ayganlar: " + data[i].recovered+
-                        `\nOldingi statistikalar bilan solishtirih uchun  \n#${data[i].country} hesh-tegidan foydalaning`
+                        `\nOldingi statistikalar bilan solishtirish uchun  \n#${data[i].country} hesh-tegidan foydalaning`
                 })
             })
             .catch((err) => {
@@ -185,7 +185,7 @@ bot.hears("Uzbekiston", cxt=>{
     },{caption: `Davlat: ${uz[0].country},\nAholisi: ${uz[0].population} ` +
     "\nJami kasallanganlar: " + uz[0].cases + "\nBugun qayt etilganlar: " + uz[0].todayCases +
     "\nVafot etganlar: " + uz[0].deaths + "\nSog'ayganlar: " + uz[0].recovered+
-    `\nOldingi statistikalar bilan solishtirih uchun  \n#${uz[0].country} hesh-tegidan foydalaning`
+    `\nOldingi statistikalar bilan solishtirish uchun  \n#${uz[0].country} hesh-tegidan foydalaning`
 }
 )
 })
