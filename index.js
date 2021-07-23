@@ -36,7 +36,7 @@ bot.start(cxt => {
         .keyboard(keyArray)
         .oneTime()
         .resize()
-    )
+    ).then()
 
 })
 
