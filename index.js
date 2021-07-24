@@ -180,7 +180,6 @@ fetch(Url)
     .catch((err) => {
         console.log("xatolik " + err);
     })
-console.log("Api ishladi");
 }
 
 
@@ -188,7 +187,7 @@ console.log("Api ishladi");
 
 bot.hears('Osiyo', (ctx) => {
     ctx.replyWithPhoto({ 
-        url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/11/continent-of-asia.png"
+        url: "https://t.me/mychanel_bot_1/13"
     }, {
         caption: 'Osiyo',
         parse_mode: 'Markdown',
@@ -198,7 +197,7 @@ bot.hears('Osiyo', (ctx) => {
 
 bot.hears('Afrika', (ctx) => {
     ctx.replyWithPhoto({ 
-        url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-africa.png"
+        url: "https://t.me/mychanel_bot_1/12"
      }, {
         caption: 'Afrika',
         parse_mode: 'Markdown',
@@ -208,7 +207,7 @@ bot.hears('Afrika', (ctx) => {
 
 bot.hears('Yevropa', (ctx) => {
      ctx.replyWithPhoto({ 
-         url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-europe.png"
+         url: "https://t.me/mychanel_bot_1/16"
          }, {
         caption: 'Yevropa',
         parse_mode: 'Markdown',
@@ -220,7 +219,7 @@ bot.hears('Yevropa', (ctx) => {
 bot.hears('Australiya va Okeaniya', (ctx) => {
 
      ctx.replyWithPhoto({ 
-         url: "https://www.worldatlas.com/r/w1200/upload/91/31/49/au-02.png" 
+         url: "https://t.me/mychanel_bot_1/15" 
         }, {
         caption: 'Australiya va Okeaniya',
         parse_mode: 'Markdown',
@@ -232,7 +231,7 @@ bot.hears('Australiya va Okeaniya', (ctx) => {
 bot.hears('Shimoliy Amerika', (ctx) => {
 
     ctx.replyWithPhoto({ 
-        url: rasm
+        url: 'https://t.me/mychanel_bot_1/17'
     }, {
        caption: 'Shimoliy Amerika',
        parse_mode: 'Markdown',
@@ -244,7 +243,7 @@ bot.hears('Shimoliy Amerika', (ctx) => {
 
 bot.hears('Janubiy Amerika', (ctx) => {
     ctx.replyWithPhoto({
-         url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-south-america.png"
+         url: "https://t.me/mychanel_bot_1/14"
         }, {
        caption: 'Janubiy Amerika',
        parse_mode: 'Markdown',
