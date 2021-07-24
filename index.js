@@ -25,7 +25,6 @@ let keyArray = [
 ]
 
 bot.start(cxt => {
-    console.log(Asia);
 
     let chat_id = cxt.chat.id;
     if (!obunachilar.includes(chat_id)) {
@@ -248,9 +247,7 @@ bot.hears('Shimoliy Amerika', (ctx) => {
 
 
 bot.hears('Janubiy Amerika', (ctx) => {
-    console.log("janubiy");
-    ctx.reply("sa").catch("log")
-    console.log(South_America);
+
     ctx.replyWithPhoto({
         url: rasm
     }, {
