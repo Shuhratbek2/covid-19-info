@@ -165,7 +165,7 @@ fetch(Url)
                         {
                             let n1 = Europe.length; 
                             let n = Europe[n1-1].length; 
-                            Europe[n1-1].push({ text: element.country, callback_data:element.country });
+                            Europe[n1-1].push(Obj);
                             if(n ===1) Europe.push([]) 
                             break;
                         }
@@ -232,7 +232,7 @@ bot.hears('Australiya va Okeaniya', (ctx) => {
 bot.hears('Shimoliy Amerika', (ctx) => {
 
     ctx.replyWithPhoto({ 
-        url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-north-america.png"
+        url: rasm
     }, {
        caption: 'Shimoliy Amerika',
        parse_mode: 'Markdown',
@@ -243,7 +243,6 @@ bot.hears('Shimoliy Amerika', (ctx) => {
 
 
 bot.hears('Janubiy Amerika', (ctx) => {
-
     ctx.replyWithPhoto({
          url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-south-america.png"
         }, {
@@ -267,8 +266,6 @@ bot.hears("Uzbekiston", cxt=>{
 }
 ).then()
 })
-
-
 
 
 bot.launch();
