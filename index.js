@@ -3,7 +3,7 @@
 
 // npm paketlar
 const { Telegraf, Markup, Router } = require("telegraf");
-const nodemon = require("nodemon")
+// const nodemon = require("nodemon")
 const fetch = require("node-fetch")
 const dotenv = require("dotenv")
 dotenv.config();
@@ -15,24 +15,39 @@ if (token === undefined) {
 let userName = [];
 let obunachilar = [];
 const bot = new Telegraf(token);
+const rasm = 'https://i2.wp.com/healthtechinsider.com/wp-content/uploads/CDC-COVID-bot.jpg?resize=600%2C275&ssl=1';
 
 let keyArray = [
-    ["Davlatlar 1-50", ' Davlatlar 50-100'], // Row1 with 2 buttons
-    ['Davlatlar 100-160', 'Davlatlar 160-222'], // Row2 with 2 buttons
+    ["Osiyo", 'Yevropa'], // Row1 with 2 buttons
+    ['Afrika', 'Australiya va Okeaniya'], // Row2 with 2 buttons
+    ["Shimoliy Amerika", "Janubiy Amerika"],
     ["Uzbekiston"]
     // ['📢 Ads', '⭐️ Rate us', '👥 Share'] // Row3 with 3 buttons
 ]
+bot.help(ctx => {
+    ctx.replyWithPhoto({ url: rasm }, {
+            caption: "salom"
+        }, Markup
+        .keyboard(keyArray)
+        .oneTime()
+        .resize()
 
+    )
+})
 bot.start(cxt => {
     let chat_id = cxt.chat.id;
     if (!obunachilar.includes(chat_id)) {
         obunachilar.push(chat_id);
         if (cxt.chat.username) userName.push(cxt.chat.username);
-        else userName.length(cxt.chat.last_name)
+        else userName.length(cxt.chat.last_name + " bu user name emas")
     }
-    cxt.reply(`Assalomu aleykum men info botman \n Men sizga covid-19 bo'yicha statistik ma'lumot beraman \n` +
-        `Men 222 davlat haqida ma'lumot berishim mumkin.\n\n Sizga yana qanday malumotlar qiziq bu haqida menga xabar bering! \n` +
-        `Taklif va kamchiliklar haqida  @Suhayl_2020 ga xabar bering`, Markup
+    cxt.reply(`Assalomu aleykum ${cxt.from.first_name} men Covid-19 info botman.` +
+        `\nMen 220 ta davlat bo'yicha covid-19 virus haqidagi statistik ma'lumotini beraman \n\n` +
+        `Mendan foydalanish uchun teskor tugmalardan foydalaning yoki "Davlat" nomini ingliz tilida yozing.\n` +
+        `Eslatma: davlat nomlarini oldin bot orqali ko'rib chiqing, ba'zi davlatlar nomini qisqa yozish kerak. \n` +
+        `Misol uchun USA. ` +
+        `\nSizga yana qanday malumotlar qiziq bu haqida menga xabar yuboring! \n\n\n` +
+        `Taklif va kamchiliklar haqida  @Suhayl_2020 ga xabar bering!`, Markup
         .keyboard(keyArray)
         .oneTime()
         .resize()
@@ -59,124 +74,186 @@ bot.command("/statika", cxt => {
 
 // API manzili
 const Url = "https://disease.sh/v3/covid-19/countries";
-let array = []
-let uz = []
+let array = [];
+let uz = [];
+let  Africa = [[]];               //  1 Africa
+let Asia = [[]];                  //  2 Asia
+let Australia_Oceania = [[]];     // 3 Australia-Oceania
+let South_America = [[]];         // 4 South America
+let  Europe = [[]];               //  5 Europe         
+let North_America = [[]];         // 6 North America
+
+
 fetch(Url)
-    .then((res) => res.json())
-    .then(data => {
-        data.forEach((element, index) => {
-            array.push({ text: element.country, callback_data: index })
+.then((res) => res.json())
+.then(data => {
+    data.forEach((element, index) => {
+        let caption = `Davlat: ${data[index].country},\nAholisi: ${data[index].population} ` +
+        "\nJami kasallanganlar: " + data[index].cases + "\nBugun qayt etilganlar: " + data[index].todayCases +
+        "\nVafot etganlar: " + data[index].deaths + "\nSog'ayganlar: " + data[index].recovered+
+        `\nOldingi statistikalar bilan solishtirish uchun  \n#${data[index].country} hesh-tegidan foydalaning`;
+        
+        let Obj = { text: element.country, callback_data: element.country }
+
+          bot.action(element.country, ctx => {
+
+              let flag = data[index].countryInfo.flag;
+                  ctx.replyWithPhoto({
+                      url: flag,
+                  }, {
+                      caption: caption
+                     })
+          })
+
+          bot.hears(element.country, ctx=>{
+            let flag = data[index].countryInfo.flag;
+            ctx.replyWithPhoto({
+                url: flag,
+            }, {
+                caption: caption
+            })
+          })
+            
             uz.push(data[213])
+           
+
+                switch (element.continent) {
+                    case "Africa":{
+                        let n1 = Africa.length; 
+                        let n = Africa[n1-1].length; 
+                        Africa[n1-1].push(Obj);
+                        if(n ===1) Africa.push([])
+                        break;
+                    }
+                    case "Asia":{
+                    
+                        let n1 = Asia.length; 
+                        let n = Asia[n1-1].length; 
+                        Asia[n1-1].push(Obj);
+                        if(n ===1) Asia.push([]) 
+                        break;
+                    }
+                    case "Australia-Oceania":{
+
+                        let n1 = Australia_Oceania.length; 
+                        let n = Australia_Oceania[n1 - 1].length; 
+                        Australia_Oceania[n1 - 1].push(Obj);
+                        if (n === 1)  Australia_Oceania.push([])
+                        break;
+                    }
+                    case "South America":{
+
+                        let n1 = South_America.length; 
+                        let n = South_America[n1 - 1].length; 
+                        South_America[n1 - 1].push(Obj);
+                        if (n === 1) South_America.push([]) 
+                        break
+                    }
+                    case "North America":
+                        {
+
+                            let n1 = North_America.length; 
+                            let n = North_America[n1 - 1].length; 
+                            North_America[n1 - 1].push(Obj);
+                            if (n === 1)  North_America.push([])
+                            
+                            break;
+                            }
+                        
+                    case "Europe":
+                        {
+                            let n1 = Europe.length; 
+                            let n = Europe[n1-1].length; 
+                            Europe[n1-1].push({ text: element.country, callback_data:element.country });
+                            if(n ===1) Europe.push([]) 
+                            break;
+                        }
+                    default:
+                      
+                        break;
+                }
         });
-        let j = 0;
-        dom()
+       
+        
     })
     .catch((err) => {
         console.log(err);
     })
 
 
-let btnArr1 = []
-let btnArr2=[]
-let btnArr3 =[]
-let btnArr4=[]
 
-let h1 = -1;
-let h2 =-1;
-let h3= -1
-let h4=-1;
 
-function dom() {
-    array.forEach((element, index) => {
-        if (index % 2 == 0 && index < 50) {
-            btnArr1.push([])
-            h1++
-        }
-        if(index<50) btnArr1[h1].push(element)
 
-        // index 50 dan keyin 
-        if (index % 2 == 0 && index >=50  && index < 100) {
-            btnArr2.push([])
-            h2++
-        }
-        if (index >= 50 && index < 100) btnArr2[h2].push(element)
 
-        //100dan 161gach
-
-        if(index % 2 == 0 && index >= 100 && index < 160){
-            btnArr3.push([])
-            h3++
-        } 
-        if(index >= 100 && index < 160)btnArr3[h3].push(element);
-
-        //161 dn keyin 
-        if(index % 2 == 0 && index >= 160){
-            btnArr4.push([])
-            h4++
-
-        } 
-        if(index >=160 ) btnArr4[h4].push(element);
-
-    })
-
-}
-
-const rasm = 'https://i2.wp.com/healthtechinsider.com/wp-content/uploads/CDC-COVID-bot.jpg?resize=600%2C275&ssl=1';
-bot.hears('Davlatlar 1-50', (ctx) => {
-    
-    ctx.replyWithPhoto({ url: rasm }, {
-        caption: 'Caption',
+bot.hears('Osiyo', (ctx) => {
+    ctx.replyWithPhoto({ 
+        url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/11/continent-of-asia.png"
+    }, {
+        caption: 'Osiyo',
         parse_mode: 'Markdown',
-        ...Markup.inlineKeyboard(btnArr1)
+        ...Markup.inlineKeyboard(Asia)
     }).then()
 })
-bot.hears('Davlatlar 50-100', (ctx) => {
-    ctx.replyWithPhoto({ url: rasm }, {
-        caption: 'Caption',
+
+bot.hears('Afrika', (ctx) => {
+    ctx.replyWithPhoto({ 
+        url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-africa.png"
+     }, {
+        caption: 'Afrika',
         parse_mode: 'Markdown',
-        ...Markup.inlineKeyboard(btnArr2)
+        ...Markup.inlineKeyboard(Africa)
     }).then()
 })
-bot.hears('Davlatlar 100-160', (ctx) => {
-     ctx.replyWithPhoto({ url: rasm }, {
-        caption: 'Caption',
-        parse_mode: 'Markdown',
-        ...Markup.inlineKeyboard(btnArr3)
-    }).then()
 
-})
-bot.hears('Davlatlar 160-222', (ctx) => {
-
-     ctx.replyWithPhoto({ url: rasm }, {
-        caption: 'Caption',
+bot.hears('Yevropa', (ctx) => {
+     ctx.replyWithPhoto({ 
+         url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-europe.png"
+         }, {
+        caption: 'Yevropa',
         parse_mode: 'Markdown',
-        ...Markup.inlineKeyboard(btnArr4)
+        ...Markup.inlineKeyboard(Europe)
     }).then()
 
 })
 
+bot.hears('Australiya va Okeaniya', (ctx) => {
 
-for (let i = 0; i <= 222; i++) {
-    bot.action(i + "", ctx => {
-        fetch(Url)
-            .then((res) => res.json())
-            .then(data => {
-                let flag = data[i].countryInfo.flag;
-                ctx.replyWithPhoto({
-                    url: flag,
-                }, {
-                    caption: `Davlat: ${data[i].country},\nAholisi: ${data[i].population} ` +
-                        "\nJami kasallanganlar: " + data[i].cases + "\nBugun qayt etilganlar: " + data[i].todayCases +
-                        "\nVafot etganlar: " + data[i].deaths + "\nSog'ayganlar: " + data[i].recovered+
-                        `\nOldingi statistikalar bilan solishtirish uchun  \n#${data[i].country} hesh-tegidan foydalaning`
-                })
-            })
-            .catch((err) => {
-                ctx.reply(err)
-                console.log(err);
-            })
-    })
-}
+     ctx.replyWithPhoto({ 
+         url: "https://www.worldatlas.com/r/w1200/upload/91/31/49/au-02.png" 
+        }, {
+        caption: 'Australiya va Okeaniya',
+        parse_mode: 'Markdown',
+        ...Markup.inlineKeyboard(Australia_Oceania)
+    }).then()
+
+})
+
+bot.hears('Shimoliy Amerika', (ctx) => {
+
+    ctx.replyWithPhoto({ 
+        url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-north-america.png"
+    }, {
+       caption: 'Shimoliy Amerika',
+       parse_mode: 'Markdown',
+       ...Markup.inlineKeyboard(North_America)
+   }).then()
+
+})
+
+
+bot.hears('Janubiy Amerika', (ctx) => {
+
+    ctx.replyWithPhoto({
+         url: "https://www.whatarethe7continents.com/wp-content/uploads/2011/12/continent-of-south-america.png"
+        }, {
+       caption: 'Janubiy Amerika',
+       parse_mode: 'Markdown',
+       ...Markup.inlineKeyboard(South_America)
+   }).then()
+
+})
+
+
 bot.hears("Uzbekiston", cxt=>{
     let flag = uz[0].countryInfo.flag;
 
@@ -189,4 +266,8 @@ bot.hears("Uzbekiston", cxt=>{
 }
 ).then()
 })
+
+
+
+
 bot.launch();
