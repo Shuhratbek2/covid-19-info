@@ -32,7 +32,7 @@ bot.start(cxt => {
     }
     cxt.reply(`Assalomu aleykum men info botman \n Men sizga covid-19 bo'yicha statistik ma'lumot beraman \n` +
         `Men 222 davlat haqida ma'lumot berishim mumkin.\n\n Sizga yana qanday malumotlar qiziq bu haqida menga xabar bering! \n` +
-        `Taklif va kamchiliklar haqida  @Sh_admin_bot ga xabar bering`, Markup
+        `Taklif va kamchiliklar haqida  @Suhayl_2020 ga xabar bering`, Markup
         .keyboard(keyArray)
         .oneTime()
         .resize()
