@@ -177,7 +177,7 @@ fetch(Url)
         
     })
     .catch((err) => {
-        console.log(err);
+        console.log("xatolik " + err);
     })
 
 
