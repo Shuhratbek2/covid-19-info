@@ -35,6 +35,7 @@ bot.help(ctx => {
     )
 })
 bot.start(cxt => {
+    Api();
     let chat_id = cxt.chat.id;
     if (!obunachilar.includes(chat_id)) {
         obunachilar.push(chat_id);
@@ -83,7 +84,7 @@ let South_America = [[]];         // 4 South America
 let  Europe = [[]];               //  5 Europe         
 let North_America = [[]];         // 6 North America
 
-
+function  Api(){
 fetch(Url)
 .then((res) => res.json())
 .then(data => {
@@ -179,8 +180,8 @@ fetch(Url)
     .catch((err) => {
         console.log("xatolik " + err);
     })
-
-
+console.log("Api ishladi");
+}
 
 
 
