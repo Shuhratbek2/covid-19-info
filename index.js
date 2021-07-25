@@ -29,8 +29,10 @@ bot.start(cxt => {
     let chat_id = cxt.chat.id;
     if (!obunachilar.includes(chat_id)) {
         obunachilar.push(chat_id);
-        if (cxt.chat.username) userName.push(cxt.chat.username);
-        else userName.length(cxt.chat.last_name + " bu user name emas")
+        console.log(cxt.chat);
+        if (cxt.chat.username) {
+            userName.push(cxt.chat.username)
+        } else userName.push(cxt.chat.first_name + " bu user name emas")
     }
     cxt.reply(`Assalomu aleykum ${cxt.from.first_name} men Covid-19 info botman.` +
         `\nMen 220 ta davlat bo'yicha covid-19 virus haqidagi statistik ma'lumotini beraman \n\n` +
