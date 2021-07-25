@@ -29,7 +29,6 @@ bot.start(cxt => {
     let chat_id = cxt.chat.id;
     if (!obunachilar.includes(chat_id)) {
         obunachilar.push(chat_id);
-        console.log(cxt.chat);
         if (cxt.chat.username) {
             userName.push(cxt.chat.username)
         } else userName.push(cxt.chat.first_name + " bu user name emas")
