@@ -255,7 +255,7 @@ bot.hears('Janubiy Amerika', (ctx) => {
         caption: 'Janubiy Amerika',
         parse_mode: 'Markdown',
         ...Markup.inlineKeyboard(South_America)
-    }).then().catch(console.log("aha"))
+    }).then()
 
 })
 
